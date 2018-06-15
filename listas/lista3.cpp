@@ -230,6 +230,33 @@ int questao2(Pilha *p1, int info) {
 	return 0;
 }
 
+/* Uma palavra eh um palindromo se tem a mesma sequencia de letras, quer seja
+lida da esquerda para direita ou da direita para a esquerda (exemplo: ARARA).
+Escreva um algoritmo para verificar se uma palavra eh um palindromo. Use
+Pilhas(s) e/ou filas(s). */
+bool questao3(string palavra) {
+	// aux recebe o tamanho da palavra
+	int aux = len(palavra);
+	// cria-se as pilhas p1 e p2
+	Pilha *p1, *p2;
+	
+	// p1 recebe a palavra do comeco ao final e p2 o inverso
+	for (int i = 0; i < aux; i++) {
+		p1->push(palavra[i]);
+		p2->push(palavra[aux-i-1]);
+	}
+	
+	// checa-se nodo a nodo de p1 e p2 se seus topos coincidem
+	// se nao coincidirem, retorna false
+	while (not p1->isEmpty()) {
+		if (p1->pop() != p2->pop())
+			return false;
+	}
+	
+	// se sair do laco, eh porque coincidem e retorna true
+	return true;
+}
+
 /* funcao principal */
 int main () {
 }
