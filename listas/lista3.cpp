@@ -1,6 +1,21 @@
 #include<iostream>
 using namespace std;
 
+/* estrutura e metodos da lista encadeada */
+class Lista {
+	private:
+	Nodo *head;
+	
+	public:
+	Nodo* getHead() {
+		return head;
+	}
+	
+	void setHead(Nodo *head) {
+		this->head = head;
+	}
+}
+
 /* estrutura e metodos da pilha */
 class Pilha {
 	private:
@@ -183,7 +198,7 @@ Pilha* questao1(Pilha *p1, Pilha *p2) {
 		else if (p2->isEmpty())
 			p3->push(p1->pop());
 		// adiciona topo de p1 se for menor que o topo de p2
-		else if (p1->top() < p2->top())
+		else if (p1->top()->getInfo() < p2->top()->getInfo())
 			p3->push(p1->pop());
 		// adiciona topo de p2 se for menor ou igual que o topo de p1
 		else
@@ -211,7 +226,7 @@ int questao2(Pilha *p1, int info) {
 		// se o item procurado nao for o topo da pilha,
 		// remove o topo da pilha 1, o empilha na pilha 2
 		// e atualiza o valor da posicao do nodo de p1
-		if (p1->top() != info) {
+		if (p1->top()->getInfo() != info) {
 			p2->push(p1->pop());
 			posicao++;
 		}
@@ -255,6 +270,43 @@ bool questao3(string palavra) {
 	
 	// se sair do laco, eh porque coincidem e retorna true
 	return true;
+}
+
+/* Utilizando uma pilha, escreva um metodo que receba um numero inteiro
+positivo no formato decimal e converte este numero para o formato binario. O
+metodo retorna uma lista encadeada com os digitos que fazem parte do numero em
+binario. */
+void questao4(int numero) {
+	// implementar os metodos de lista
+}
+
+/* Faca um metodo que recebe como parametro uma chave c e remove o elemento
+correspondente a essa chave caso exista na pilha. Ao final da execucao da
+funcao, a pilha deve ser igual a original, exceto pela ausencia do item
+removido. Utilize estruturas de filas ou pilhas como apoio. */
+void questao5(Pilha *p1, int c) {
+	// cria uma pilha auxiliar p2
+	Pilha *p2;
+	p2->criarPilha();
+	
+	// enquanto p1 nao esta vazia, checa o valor do topo
+	while (not p1->isEmpty()) {
+		// se a info do topo nao corresponder a c,
+		// remove o topo de p1 e o adiciona em p2
+		if (p1->top()->getInfo() != c)
+			p2->push(p1->pop());
+		// se a info do topo corresponder a c,
+		// apenas remove o topo de p1, sem salvar na pilha auxiliar
+		// e sai do laco
+		else {
+			p1->pop();
+			break;
+		}
+	}
+	
+	// remove os valores de p2, adicionando-os novamente em p1
+	while (not p2->isEmpty())
+		p1->push(p2->pop());
 }
 
 /* funcao principal */
