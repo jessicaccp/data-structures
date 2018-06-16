@@ -147,6 +147,55 @@ class Fila {
 		this->fim = fim;
 	}
 	
+	// criacao
+	void criarFila() {
+		inicio = fim = nullptr;
+	}
+	
+	// destruicao
+	
+	// insercao de um elemento (insere no fim) - cabeca da lista
+	void enfileira(int info) {
+		Nodo *novo = new Nodo();
+		novo->setInfo(info);
+		novo->setProx(fim);
+		novo->setAnt(nullptr);
+		
+		if (fim != nullptr)
+			fim->setAnt(novo);
+			
+		fim = novo;
+	}
+	
+	// remocao de um elemento (remove no comeco) - rabo da lista
+	int desenfileira() {
+		Nodo *aux = inicio;
+		int auxInfo = aux->getInfo();
+		
+		inicio = inicio->getAnt();
+		inicio->setProx(nullptr);
+		
+		aux->setProx(aux);
+		aux->setAnt(aux);
+		delete aux;
+		
+		return auxInfo;
+	}
+	
+	// localizacao de um elemento para consulta ou alteracao
+	
+	// ordenacao de uma lista
+	// ?
+	
+	// intercalacao de duas listas
+	void intercalar(Lista *l1, Lista *l2) {
+		while ((not l1->isEmpty()) and (not l2->isEmpty())) {
+			// incompleto
+		}
+	}
+	// concatenacao de duas listas
+	// divisao de uma lista em duas	
+	
 };
 
 /* estrutura e metodos do nodo */
@@ -307,6 +356,14 @@ void questao5(Pilha *p1, int c) {
 	// remove os valores de p2, adicionando-os novamente em p1
 	while (not p2->isEmpty())
 		p1->push(p2->pop());
+}
+
+/* Faca uma funcao para gerar uma fila a partir de duas filas ordenadas, a fila
+final tambem ficara ordenada (merge). Ex:
+F 1 ={5, 20, 30, 50}, F 2 ={1. 8. 25. 40} →
+F r ={1, 5, 8, 20, 25, 30, 40, 50 } */
+void questao6() {
+	// implementar os metodos de fila
 }
 
 /* funcao principal */
