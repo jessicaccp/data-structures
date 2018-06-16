@@ -14,6 +14,60 @@ class Lista {
 	void setHead(Nodo *head) {
 		this->head = head;
 	}
+	
+	/* insere novo elemento no final da lista */
+	void insert(int info) {
+		Nodo *novo = new Nodo();
+		novo->setInfo(info);
+		novo->setProx(nullptr);
+		
+		Nodo *aux = head;
+		if (not isEmpty()) {
+			while (aux->getProx() != nullptr)
+				aux = aux->getProx();
+			aux->setProx(novo);
+			novo->setAnt(aux);
+		}
+		else {
+			novo->setAnt(nullptr);
+			head = novo;
+		}
+	
+	}
+	
+	/* remove elemento com determinada info da lista */
+	bool remove(int info) {
+		Nodo *aux = head;
+		
+		if (not isEmpty()) {
+			while (aux != nullptr) {
+				if (aux->getInfo() == info) {
+					Nodo *toDelete = aux;
+					if (toDelete->getProx() != nullptr)
+						toDelete->getProx()->setAnt(toDelete->getAnt());
+					if (toDelete->getAnt() != nullptr)
+						toDelete->getAnt()->setProx(toDelete->getProx());
+					else
+						inicio = toDelete->getProx();
+					toDelete->setProx(toDelete);
+					toDelete->setAnt(toDelete);
+					delete toDelete;
+					return true;
+				}
+				aux = aux->getProx();
+			}
+		}
+		
+		return false;
+	}
+	
+	// print
+	// isEmpty
+	// busca
+	// liberar lista
+	// inserir ordenado
+	// getSize
+	
 }
 
 /* estrutura e metodos da pilha */
