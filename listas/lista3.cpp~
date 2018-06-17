@@ -491,21 +491,54 @@ void questao5(Pilha *p1, int c) {
 /* Faca uma funcao para gerar uma fila a partir de duas filas ordenadas, a fila
 final tambem ficara ordenada (merge). */
 Fila* questao6(Fila *f1, Fila *f2) {
+	// cria a fila resultante f3
 	Fila *f3 = new Fila();
 	f3->criarFila();
 	
+	// enquanto as filas f1 e f2 nao estao vazias, adiciona os valores em f3
 	while ((not f1->isEmpty()) or (not f2->isEmpty())) {
+		// se fila f1 estiver vazia, adiciona inicio de f2 em f3
 		if (f1->isEmpty())
 			f3->enfileira(f2->desenfileira());
+		// se fila f2 estiver vazia, adiciona inicio de f1 em f3
 		else if (f2->isEmpty())
 			f3->enfileira(f1->desenfileira());
+		// se o inicio de f1 for menor, adiciona em f3
 		else if (f1->getInicio()->getInfo() < f2->getInicio()->getInfo())
 			f3->enfileira(f1->desenfileira());
+		// se o inicio de f2 for menor ou igual, adiciona em f3
 		else
 			f3->enfileira(f2->desenfileira());
 	}
 	
+	// retorna a lista resultante
 	return f3;
+}
+
+/* Faça uma função para ordenar uma fila com dados aleatórios, use duas filas
+auxiliares e a função merge do exercício anterior.
+Ex: F={10, 5, 8, 2, 4, 1} → F r ={1, 2, 4, 5, 8, 10 } */
+void questao7(Fila *f1) {
+}
+
+/* Dadas duas filas F 1 e F 2 , faça uma função para troca-las. Usar somente as
+funções de inserir e excluir da fila. */
+void questao8(Fila *f1, Fila *f2) {
+}
+
+/* Faça uma função para inverter uma fila, use filas ou pilhas como estruturas
+de apoio */
+void questao9(Fila *f1) {
+	Pilha *p1 = new Pilha();
+	p1->criarPilha();
+	
+	while (not f1->isEmpty())
+		p1->push(f1->desenfileira());
+		
+	while (not p1->isEmpty())
+		f1->enfileira(p1->pop());
+		
+	f1->print();
 }
 
 /* funcao principal */
@@ -525,6 +558,6 @@ int main () {
 	f2->enfileira(8);
 	f2->enfileira(25);
 	f2->enfileira(40);
-	Fila *f3 = questao6(f1, f2);
-	f3->print();
+	questao9(f1);
+	questao9(f2);
 }

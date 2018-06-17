@@ -515,6 +515,33 @@ Fila* questao6(Fila *f1, Fila *f2) {
 	return f3;
 }
 
+/* Faça uma função para ordenar uma fila com dados aleatórios, use duas filas
+auxiliares e a função merge do exercício anterior.
+Ex: F={10, 5, 8, 2, 4, 1} → F r ={1, 2, 4, 5, 8, 10 } */
+void questao7(Fila *f1) {
+}
+
+/* Dadas duas filas F 1 e F 2 , faça uma função para troca-las. Usar somente as
+funções de inserir e excluir da fila. */
+void questao8(Fila *f1, Fila *f2) {
+}
+
+/* Faça uma função para inverter uma fila, use filas ou pilhas como estruturas
+de apoio */
+void questao9(Fila *f1) {
+	// cria uma pilha auxiliar p1
+	Pilha *p1 = new Pilha();
+	p1->criarPilha();
+	
+	// adiciona todos os valores de f1 em p1
+	while (not f1->isEmpty())
+		p1->push(f1->desenfileira());
+		
+	// readiciona todos os valores de p1 em f1, que estarão na ordem contraria
+	while (not p1->isEmpty())
+		f1->enfileira(p1->pop());
+}
+
 /* funcao principal */
 int main () {
 //F 1 ={5, 20, 30, 50}, F 2 ={1. 8. 25. 40} →
@@ -532,6 +559,6 @@ int main () {
 	f2->enfileira(8);
 	f2->enfileira(25);
 	f2->enfileira(40);
-	Fila *f3 = questao6(f1, f2);
-	f3->print();
+	questao9(f1);
+	questao9(f2);
 }
