@@ -263,7 +263,8 @@ class Fila {
 	
 	// criacao
 	void criarFila() {
-		inicio = fim = nullptr;
+		inicio = nullptr;
+		fim = nullptr;
 	}
 	
 	// destruicao
@@ -274,6 +275,9 @@ class Fila {
 		novo->setInfo(info);
 		novo->setProx(fim);
 		novo->setAnt(nullptr);
+		
+		if (inicio == nullptr)
+			inicio = novo;
 		
 		if (fim != nullptr)
 			fim->setAnt(novo);
@@ -287,7 +291,8 @@ class Fila {
 		int auxInfo = aux->getInfo();
 		
 		inicio = inicio->getAnt();
-		inicio->setProx(nullptr);
+		if (inicio != nullptr)
+			inicio->setProx(nullptr);
 		
 		aux->setProx(aux);
 		aux->setAnt(aux);
@@ -303,6 +308,12 @@ class Fila {
 			aux = aux->getAnt();
 		}
 		cout << endl;
+	}
+	
+	bool isEmpty() {
+		if (inicio == nullptr)
+			return true;
+		return false;
 	}
 	
 	// localizacao de um elemento para consulta ou alteracao
@@ -419,28 +430,33 @@ bool questao3(string palavra) {
 positivo no formato decimal e converte este numero para o formato binario. O
 metodo retorna uma lista encadeada com os digitos que fazem parte do numero em
 binario. */
-void questao4(int numero) {
-	// recebe numero
-	// divide por 2 e salva os restos na pilha
-	// salva da pilha pra lista
-	
+Lista* questao4(int numero) {
+	// cria uma nova pilha
 	Pilha *p1 = new Pilha();
 	p1->criarPilha();
 	
-	while (numero > 0) {
-		p1->push(numero%2);
-		numero /= 2;
-	}
-	
-	p1->print();
+	// se o numero for zero, sua representacao em binario eh zero
+	if (numero == 0)
+		p1->push(0);
+	// se nao, enquanto o numero for maior que zero, salva o resto da divisao
+	// por 2 na pilha p1
+	else
+		while (numero > 0) {
+			p1->push(numero%2);
+			numero /= 2;
+		}
 
+	// cria uma nova lista encadeada
 	Lista *l1 = new Lista();
 	l1->criarLista();
 	
+	// como o valor na pilha esta invertido, adiciona os valores da pilha na
+	// lista, para ficarem na ordem correta
 	while (not p1->isEmpty())
 		l1->insert(p1->pop());
-		
-	l1->print();
+	
+	// retorna a lista
+	return l1;
 }
 
 /* Faca um metodo que recebe como parametro uma chave c e remove o elemento
@@ -449,7 +465,7 @@ funcao, a pilha deve ser igual a original, exceto pela ausencia do item
 removido. Utilize estruturas de filas ou pilhas como apoio. */
 void questao5(Pilha *p1, int c) {
 	// cria uma pilha auxiliar p2
-	Pilha *p2;
+	Pilha *p2 = new Pilha();
 	p2->criarPilha();
 	
 	// enquanto p1 nao esta vazia, checa o valor do topo
@@ -473,16 +489,49 @@ void questao5(Pilha *p1, int c) {
 }
 
 /* Faca uma funcao para gerar uma fila a partir de duas filas ordenadas, a fila
-final tambem ficara ordenada (merge). Ex:
-F 1 ={5, 20, 30, 50}, F 2 ={1. 8. 25. 40} →
-F r ={1, 5, 8, 20, 25, 30, 40, 50 } */
-void questao6() {
-	// implementar os metodos de fila
+final tambem ficara ordenada (merge). */
+Fila* questao6(Fila *f1, Fila *f2) {
+	// cria a fila resultante f3
+	Fila *f3 = new Fila();
+	f3->criarFila();
+	
+	// enquanto as filas f1 e f2 nao estao vazias, adiciona os valores em f3
+	while ((not f1->isEmpty()) or (not f2->isEmpty())) {
+		// se fila f1 estiver vazia, adiciona inicio de f2 em f3
+		if (f1->isEmpty())
+			f3->enfileira(f2->desenfileira());
+		// se fila f2 estiver vazia, adiciona inicio de f1 em f3
+		else if (f2->isEmpty())
+			f3->enfileira(f1->desenfileira());
+		// se o inicio de f1 for menor, adiciona em f3
+		else if (f1->getInicio()->getInfo() < f2->getInicio()->getInfo())
+			f3->enfileira(f1->desenfileira());
+		// se o inicio de f2 for menor ou igual, adiciona em f3
+		else
+			f3->enfileira(f2->desenfileira());
+	}
+	
+	// retorna a lista resultante
+	return f3;
 }
 
 /* funcao principal */
 int main () {
-	questao4(5);
-	questao4(13);
-	questao4(1);
+//F 1 ={5, 20, 30, 50}, F 2 ={1. 8. 25. 40} →
+//F r ={1, 5, 8, 20, 25, 30, 40, 50 } 
+
+	Fila *f1 = new Fila();
+	Fila *f2 = new Fila();
+	f1->criarFila();
+	f2->criarFila();
+	f1->enfileira(5);
+	f1->enfileira(20);
+	f1->enfileira(30);
+	f1->enfileira(50);
+	f2->enfileira(1);
+	f2->enfileira(8);
+	f2->enfileira(25);
+	f2->enfileira(40);
+	Fila *f3 = questao6(f1, f2);
+	f3->print();
 }
