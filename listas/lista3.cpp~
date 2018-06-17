@@ -110,6 +110,10 @@ class Lista {
 		}
 		cout << endl;
 	}
+	
+	void criarLista() {
+		head = nullptr;
+	}
 	// busca
 	// liberar lista
 	// inserir ordenado
@@ -362,14 +366,14 @@ int questao2(Pilha *p1, int info) {
 	// checa enquanto a pilha nao estiver vazia
 	while (not p1->isEmpty()) {
 		// se o item procurado nao for o topo da pilha,
-		// remove o topo da pilha 1, o empilha na pilha 2
+		// remove o topo da pilha p1, o empilha na pilha p2
 		// e atualiza o valor da posicao do nodo de p1
 		if (p1->top()->getInfo() != info) {
 			p2->push(p1->pop());
 			posicao++;
 		}
-		// se o item estiver no topo da pilha 1,
-		// restaura a pilha p1 e retorna a posicao do item na pilha
+		// se o item estiver no topo da pilha p1,
+		// restaura a pilha p1 e retorna a posicao do item
 		else {
 			while (not p2->isEmpty())
 				p1->push(p2->pop());
@@ -416,7 +420,27 @@ positivo no formato decimal e converte este numero para o formato binario. O
 metodo retorna uma lista encadeada com os digitos que fazem parte do numero em
 binario. */
 void questao4(int numero) {
-	// implementar os metodos de lista
+	// recebe numero
+	// divide por 2 e salva os restos na pilha
+	// salva da pilha pra lista
+	
+	Pilha *p1 = new Pilha();
+	p1->criarPilha();
+	
+	while (numero > 0) {
+		p1->push(numero%2);
+		numero -= numero/2;
+	}
+	
+	p1->print();
+
+	Lista *l1 = new Lista();
+	l1->criarLista();
+	
+	while (not p1->isEmpty())
+		l1->insert(p1->pop());
+		
+	l1->print();
 }
 
 /* Faca um metodo que recebe como parametro uma chave c e remove o elemento
@@ -458,18 +482,7 @@ void questao6() {
 
 /* funcao principal */
 int main () {
-	Pilha *p1 = new Pilha();
-	Pilha *p2 = new Pilha();
-	p1->criarPilha();
-	p2->criarPilha();
-	p1->push(3);
-	p2->push(6);
-	p1->push(2);
-	p2->push(5);
-	p1->push(1);
-	p2->push(4);
-	p1->print();
-	p2->print();
-	Pilha *p3 = questao1(p1, p2);
-	p3->print();
+	questao4(5);
+	questao4(13);
+	questao4(1);
 }
