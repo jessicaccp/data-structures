@@ -1,5 +1,38 @@
 #include<iostream>
+#include<string>
 using namespace std;
+
+/* estrutura e metodos do nodo */
+class Nodo {
+	private:
+	int info;
+	Nodo *ant, *prox;
+	
+	public:
+	int getInfo() {
+		return info;
+	}
+	
+	void setInfo(int info) {
+		this->info = info;
+	}
+	
+	Nodo* getAnt() {
+		return ant;
+	}
+	
+	void setAnt(Nodo *ant) {
+		this->ant = ant;
+	}
+	
+	Nodo *getProx () {
+		return prox;
+	}
+	
+	void setProx(Nodo *prox) {
+		this->prox = prox;
+	}
+};
 
 /* estrutura e metodos da lista encadeada */
 class Lista {
@@ -48,7 +81,7 @@ class Lista {
 					if (toDelete->getAnt() != nullptr)
 						toDelete->getAnt()->setProx(toDelete->getProx());
 					else
-						inicio = toDelete->getProx();
+						head = toDelete->getProx();
 					toDelete->setProx(toDelete);
 					toDelete->setAnt(toDelete);
 					delete toDelete;
@@ -61,14 +94,28 @@ class Lista {
 		return false;
 	}
 	
-	// print
-	// isEmpty
+	/* checa se a lista esta vazia */
+	bool isEmpty() {
+		if (head == nullptr)
+			return true;
+		return false;
+	}
+	
+	/* exibe os valores presentes na lista */
+	void print() {
+		Nodo *aux = head;
+		while (aux != nullptr) {
+			cout << aux->getInfo() <<  " ";
+			aux = aux->getProx();
+		}
+		cout << endl;
+	}
 	// busca
 	// liberar lista
 	// inserir ordenado
 	// getSize
 	
-}
+};
 
 /* estrutura e metodos da pilha */
 class Pilha {
@@ -126,7 +173,7 @@ class Pilha {
 	int pop() {
 		// se a pilha estiver vazia, retorna um ponteiro nulo
 		if (topo == nullptr)
-			return;
+			return EXIT_FAILURE;
 		
 		// se nao, cria-se um nodo auxiliar que recebe o topo
 		Nodo *aux = topo;
@@ -176,6 +223,15 @@ class Pilha {
 		
 		// retorna o numero de nodos
 		return num;
+	}
+	
+	void print() {
+		Nodo *aux = topo;
+		while (aux != nullptr) {
+			cout << aux->getInfo() << " ";
+			aux = aux->getAnt();
+		}
+		cout << endl;
 	}
 };
 
@@ -236,6 +292,15 @@ class Fila {
 		return auxInfo;
 	}
 	
+	void print() {
+		Nodo *aux = inicio;
+		while (aux != nullptr) {
+			cout << aux->getInfo() << " ";
+			aux = aux->getAnt();
+		}
+		cout << endl;
+	}
+	
 	// localizacao de um elemento para consulta ou alteracao
 	
 	// ordenacao de uma lista
@@ -252,48 +317,18 @@ class Fila {
 	
 };
 
-/* estrutura e metodos do nodo */
-class Nodo {
-	private:
-	int info;
-	Nodo *ant, *prox;
-	
-	public:
-	int getInfo() {
-		return info;
-	}
-	
-	void setInfo(int info) {
-		this->info = info;
-	}
-	
-	Nodo* getAnt() {
-		return ant;
-	}
-	
-	void setAnt(Nodo *ant) {
-		this->ant = ant;
-	}
-	
-	Nodo *getProx () {
-		return prox;
-	}
-	
-	void setProx(Nodo *prox) {
-		this->prox = prox;
-	}
-};
+
 
 /* Questao 1: Faca uma funcao que receba duas pilhas numericas ordenadas
 crescentemente a partir do topo. Ela deve retornar uma nova pilha de modo que
 fique ordenada decrescentemente com o maior valor no topo. */
 Pilha* questao1(Pilha *p1, Pilha *p2) {
 	// cria uma nova pilha
-	Pilha *p3;
+	Pilha *p3 = new Pilha();
 	p3->criarPilha();
 
 	// enquanto as pilhas 1 e 2 nao estao vazias
-	while ((not p1->isEmpty()) and (not p2->isEmpty())) {
+	while ((not p1->isEmpty()) or (not p2->isEmpty())) {
 		// adiciona topo de p2 em p3 se p1 estiver vazia
 		if (p1->isEmpty())
 			p3->push(p2->pop());
@@ -318,7 +353,7 @@ pilha, considerando o topo como posicao 1. A pilha deve permanecer a mesma apos
 a execucao do procedimento. Use somente as funcoes PUSH e POP. */
 int questao2(Pilha *p1, int info) {
 	// cria uma nova pilha
-	Pilha *p2;
+	Pilha *p2 = new Pilha();
 	p2->criarPilha();
 	
 	// seta a posicao, comecando pelo topo
@@ -354,9 +389,10 @@ Escreva um algoritmo para verificar se uma palavra eh um palindromo. Use
 Pilhas(s) e/ou filas(s). */
 bool questao3(string palavra) {
 	// aux recebe o tamanho da palavra
-	int aux = len(palavra);
+	int aux = palavra.length();
 	// cria-se as pilhas p1 e p2
-	Pilha *p1, *p2;
+	Pilha *p1 = new Pilha();
+	Pilha *p2 = new Pilha();
 	
 	// p1 recebe a palavra do comeco ao final e p2 o inverso
 	for (int i = 0; i < aux; i++) {
@@ -422,4 +458,18 @@ void questao6() {
 
 /* funcao principal */
 int main () {
+	Pilha *p1 = new Pilha();
+	Pilha *p2 = new Pilha();
+	p1->criarPilha();
+	p2->criarPilha();
+	p1->push(3);
+	p2->push(6);
+	p1->push(2);
+	p2->push(5);
+	p1->push(1);
+	p2->push(4);
+	p1->print();
+	p2->print();
+	Pilha *p3 = questao1(p1, p2);
+	p3->print();
 }
