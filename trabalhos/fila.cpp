@@ -158,7 +158,7 @@ class Fila {
 		// Nao para o loop quando encontra o valor, senao eles nao serao
 		// reinseridos na mesma posicao
 		while (inicio != nullptr) {
-			if (inicio->getInfo == info)
+			if (inicio->getInfo() == info)
 				flag = true;
 			f->enfileira(desenfileira());
 		}
@@ -254,10 +254,10 @@ class Fila {
 		
 		// Enfileira os valores da fila auxiliar de volta na fila original
 		if (not f1->isEmpty())
-			while (f1->getInicio != nullptr)
+			while (f1->getInicio() != nullptr)
 				enfileira(f1->desenfileira());
 		else
-			while (f2->getInicio != nullptr)
+			while (f2->getInicio() != nullptr)
 				enfileira(f2->desenfileira());
 	}
 };
@@ -268,6 +268,11 @@ int main () {
 	Fila *f = new Fila();
 	f->criarFila();
 	int op = 0, info = 0;
+	
+	Fila *f1 = new Fila();
+	Fila *f2 = new Fila();
+	f1->criarFila();
+	f2->criarFila();
 	
 	// Menu
 	while (true) {
@@ -354,28 +359,42 @@ int main () {
 			
 			// Concatena duas filas recebidas em uma
 			case 8:
+				cout << endl << "Menu nao implementado ainda." << endl;
+				break;
 				// concatenar
 				// recebe duas filas e exibe o final
 				
 			// Intercala duas filas recebidas em uma
 			case 9:
+				cout << endl << "Menu nao implementado ainda." << endl;
+				break;
 				// intercalar
 				// recebe duas filas e exibe a final
 				
 			// Divide a fila em duas que sao passadas por parametro
 			case 10:
-				// dividir
-				// recebe duas filas para serem preenchidas
+				if (f->isEmpty())
+					cout << endl << "Fila vazia." << endl;
+				else {
+					cout << endl << "Fila original: ";
+					f->print();
+					f->dividir(f1, f2);
+					cout << endl << "Filas divididas:" << endl << "F1 - ";
+					f1->print();
+					cout << "F2 - ";
+					f2->print();
+				}
+				break;
 				
 			// Ordena os valores da fila
 			case 11:
 				if (f->isEmpty())
 					cout << endl << "Fila vazia." << endl;
 				else {
-					cout << endl << "Lista desordenada: " <<;
+					cout << endl << "Lista desordenada: ";
 					f->print();
-					f->ordena();
-					cout << endl << "Lista ordenada: " <<;
+					f->ordenar();
+					cout << endl << "Lista ordenada: ";
 					f->print();
 				}
 				break;

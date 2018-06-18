@@ -269,6 +269,11 @@ int main () {
 	f->criarFila();
 	int op = 0, info = 0;
 	
+	Fila *f1 = new Fila();
+	Fila *f2 = new Fila();
+	f1->criarFila();
+	f2->criarFila();
+	
 	// Menu
 	while (true) {
 		// Opcoes
@@ -354,18 +359,32 @@ int main () {
 			
 			// Concatena duas filas recebidas em uma
 			case 8:
+				cout << endl << "Menu nao implementado ainda." << endl;
+				break;
 				// concatenar
 				// recebe duas filas e exibe o final
 				
 			// Intercala duas filas recebidas em uma
 			case 9:
+				cout << endl << "Menu nao implementado ainda." << endl;
+				break;
 				// intercalar
 				// recebe duas filas e exibe a final
 				
 			// Divide a fila em duas que sao passadas por parametro
 			case 10:
-				// dividir
-				// recebe duas filas para serem preenchidas
+				if (f->isEmpty())
+					cout << endl << "Fila vazia." << endl;
+				else {
+					cout << endl << "Fila original: ";
+					f->print();
+					f->dividir(f1, f2);
+					cout << endl << "Filas divididas:" << endl << "F1 - ";
+					f1->print();
+					cout << "F2 - ";
+					f2->print();
+				}
+				break;
 				
 			// Ordena os valores da fila
 			case 11:
@@ -374,7 +393,7 @@ int main () {
 				else {
 					cout << endl << "Lista desordenada: " <<;
 					f->print();
-					f->ordena();
+					f->ordenar();
 					cout << endl << "Lista ordenada: " <<;
 					f->print();
 				}
