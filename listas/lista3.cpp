@@ -542,6 +542,50 @@ void questao9(Fila *f1) {
 		f1->enfileira(p1->pop());
 }
 
+// Faça uma função recursiva para excluir os elementos de uma fila.
+// funcao deve estar dentro da classe
+void questao10(Nodo *n) {
+	if (inicio == nullptr)
+		return;
+		
+	Nodo *aux = n;
+	inicio = inicio->getAnt();
+	if (inicio != nullptr)
+		inicio->setProx(nullptr);
+		
+	aux->setProx(aux);
+	aux->setAnt(aux);
+	delete aux;
+	
+	desenfileiraTudo(inicio);
+	return;
+}
+
+/* Dada uma lista encadeada de caracteres formada por uma sequência alternada
+de letras e dígitos, construa um método que retorne uma lista na qual as
+letras são mantidas na sequência original e os dígitos são colocados na ordem
+inversa
+A1E5T7W8G → AETWG8751
+3C9H4Q6 → CHQ6493
+*/
+void questao11(Lista *l1) {
+	Nodo *aux = l1->getHead();
+	Pilha *p1 = new Pilha();
+	
+	while (aux != nullptr) {
+		if (aux->getInfo() >= '0' and aux->getInfo <= '9') {
+			p1->push(aux->getInfo());
+			l1->remove(aux->getInfo());
+		}
+		aux = aux->getProx();
+	}
+	
+	while (not p1->isEmpty())
+		l1->insert(p1->pop());
+		
+	l1->print();
+}
+
 /* funcao principal */
 int main () {
 //F 1 ={5, 20, 30, 50}, F 2 ={1. 8. 25. 40} →
