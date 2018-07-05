@@ -99,6 +99,7 @@ class Pilha {
 	
 	// Retorna valor do topo da pilha
 	// Retorna -1 se pilha esta vazia
+	//precisa de alteracao
 	int top() {
 		if (topo != nullptr)
 			return topo->getInfo();
