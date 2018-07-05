@@ -2,8 +2,8 @@
 // Centro de Ciencias e Tecnologia
 // Curso de Ciencia da Computacao
 // Disciplina de Estruturas de Dados 1 2017.2 - Prof. Bruno Lima
-// Aluna: Jessica Cristina Cacau Patricio (1388627)
-
+// Alunas: Jessica Cristina Cacau Patricio (1388627)
+//	   Camila Alves Barbosa (1394330)
 // Pilhas
 // Metodos: criarPilha, clear, isEmpty, push, pop, top, size, print, search
 
