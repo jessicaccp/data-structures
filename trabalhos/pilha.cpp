@@ -68,6 +68,12 @@ class Pilha {
 			return true;
 		return false;
 	}
+		
+	// Verifica se a pilha esta cheia
+	bool isFull() {
+		//Como a pilha e dinamica, ela nunca estara cheia.
+		return false;
+	}
 	
 	// Insere novo elemento no topo da pilha
 	void push(int info) {
@@ -171,19 +177,20 @@ int main () {
 		cout	<< endl
 				<< "1. clear"	<< endl
 				<< "2. isEmpty"	<< endl
-				<< "3. push"	<< endl
-				<< "4. pop"		<< endl
-				<< "5. top"		<< endl
-				<< "6. size"	<< endl
-				<< "7. print"	<< endl
-				<< "8. search"	<< endl
-				<< "9. sair"	<< endl;
+				<< "3. isFull"  << endl
+				<< "4. push"	<< endl
+				<< "5. pop"	<< endl
+				<< "6. top"	<< endl
+				<< "7. size"	<< endl
+				<< "8. print"	<< endl
+				<< "9. search"	<< endl
+				<< "10. sair"	<< endl;
 		
 		// Faz a leitura da opcao
-		while (op < 1 or op > 9) {
+		while (op < 1 or op > 10) {
 			cout << endl << "Opcao: ";
 			cin >> op;
-			if (op < 1 or op > 9)
+			if (op < 1 or op > 10)
 				cout << endl << "Opcao invalida." << endl;
 		}
 		
@@ -202,9 +209,17 @@ int main () {
 				else
 					cout << endl << "Pilha nao vazia." << endl;
 				break;
-				
-			// Insere valor no topo da pilha
+			
+			//Verifica se a pilha esta cheia
 			case 3:
+				if (p->isFull())
+					cout << endl << "Pilha cheia." << endl;
+				else
+					cout << endl << "A pilha nao esta cheia." << endl;
+				break;
+					
+			// Insere valor no topo da pilha
+			case 4:
 				cout << endl << "Insira o valor do elemento a ser adicionado: ";
 				cin >> info;
 				p->push(info);
@@ -212,7 +227,7 @@ int main () {
 				break;
 				
 			// Remove valor do topo da pilha, se existir
-			case 4:
+			case 5:
 				if (p->isEmpty())
 					cout << endl << "Pilha vazia." << endl;
 				else
@@ -220,7 +235,7 @@ int main () {
 				break;
 				
 			// Exibe valor do topo da pilha, se existir
-			case 5:
+			case 6:
 				if (p->isEmpty())
 					cout << endl << "Pilha vazia." << endl;
 				else
@@ -228,12 +243,12 @@ int main () {
 				break;
 				
 			// Verifica tamanho da pilha
-			case 6:
+			case 7:
 				cout << endl << "Tamanho da pilha: " << p->size() << "." << endl;
 				break;
 				
 			// Exibe os elementos da pilha, se existirem
-			case 7:
+			case 8:
 				if (p->isEmpty())
 					cout << endl << "Pilha vazia." << endl;
 				else {
@@ -243,7 +258,7 @@ int main () {
 				break;
 				
 			// Busca valor informado na pilha
-			case 8:
+			case 9:
 				cout << endl << "Insira o valor do elemento a ser procurado: ";
 				cin >> info;
 				if (p->search(info))
@@ -253,7 +268,7 @@ int main () {
 				break;
 				
 			// Sai do programa
-			case 9:
+			case 10:
 				exit(0);
 				
 			default:
