@@ -2,7 +2,7 @@
 // Centro de Ciencias e Tecnologia
 // Curso de Ciencia da Computacao
 // Disciplina de Estruturas de Dados 1 2017.2 - Prof. Bruno Lima
-// Alunas: Jessica Cristina Cacau Patricio (1388627)
+// Aluna: Jessica Cristina Cacau Patricio (1388627)
 //		  Camila Alves Barbosa (1394330)
 // Listas sequenciais
 // Metodos: criarLista, isEmpty, isFull, getSize, insert (fim), insert (pos), insert(ord), remove(index), print.
@@ -104,10 +104,10 @@ class Lista {
 			insert(element);
 		else { 
 			if (isFull())
-				insert(vetor[tamanho-1]);
+				insert(lista[tamanho-1]);
 			for (int i=getSize()-1; i>=pos; i--)
-				vetor[i+1] = vetor[i];
-			vetor[pos] = element;
+				lista[i+1] = lista[i];
+			lista[pos] = element;
 		}
 	}
 	
@@ -115,8 +115,8 @@ class Lista {
 	 void ordenar() {
 	 	for (int i=0; i<getSize()-1; i++)
 	 		for (int j=i; j<getSize(); j++)
-	 			if (vetor[i] > vetor[j])
-	 				swap(vetor[i], vetor[j]);
+	 			if (lista[i] > lista[j])
+	 				swap(lista[i], lista[j]);
 	 }
 	
 	// Insere um novo elemento de forma ordenada
@@ -124,7 +124,7 @@ class Lista {
 	void insertOrd(int element) {
 		ordenar();
 		for (int i=0; i<getSize(); i++)
-			if (element<vetor[i])
+			if (element<lista[i])
 				insert(element, i);
 	}
 	
@@ -156,7 +156,6 @@ class Lista {
 int main () {
 	Lista *l = new Lista();
 	l->criarLista();
-	info = 0;
 	
 	// Menu
 	while (true) {
