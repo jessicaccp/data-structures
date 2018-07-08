@@ -200,7 +200,7 @@ int main () {
 				if (l->isFull())
 					cout << endl << "Lista cheia." << endl;
 				else
-					cout << endl << "Lista nao vazia." << endl;
+					cout << endl << "Lista nao cheia." << endl;
 				break;
 			
 			// Imprime o tamanho da lista.
@@ -212,7 +212,7 @@ int main () {
 				cout << endl << "Insira o valor do elemento a ser adicionado na lista: ";
 				cin >> info;
 				l->insert(info);
-				cout << info << "Elemento adicionado na lista." << endl;
+				cout << info << " Elemento adicionado na lista." << endl;
 				break;
 			
 			// Insere valor desejado na posicao desejada.
@@ -222,7 +222,7 @@ int main () {
 				cout << endl << "Insira a posicao a qual voce quer inserir o elemento: ";
 				cin >> pos;
 				l->insert(element, pos);
-				cout << endl << "Elemento adicionado na lista." << endl;
+				cout << endl << " Elemento adicionado na lista." << endl;
 				break;
 				
 			// Insere o valor desejdao de uma forma ordenada.
@@ -230,7 +230,7 @@ int main () {
 				cout << endl << "Insira o elemento que voce quer inserir: ";
 				cin >> element;
 				l->insertOrd(element);
-				cout << endl << "Elemento adicionado na lista." << endl;
+				cout << endl << " Elemento adicionado na lista." << endl;
 				break;
 				
 			// Remove o elemento desejado da lista.
@@ -238,7 +238,7 @@ int main () {
 				cout << endl << "Insira a posicao que voce quer remover: ";
 				cin >> index;
 				l->remove(index);
-				cout << "Elemento removido." << endl;
+				cout << " Elemento removido." << endl;
 				break;
 			
 			// Exibe todos os elementos da lista, se existirem.
