@@ -268,20 +268,20 @@ class Lista {
 		// Opcoes
 		op = 0;
 		cout	<< endl
-				<< " 1. isEmpty"											<< endl
-				<< " 2. getSize"											<< endl
+				<< " 1. isEmpty"										<< endl
+				<< " 2. getSize"										<< endl
 				<< " 3. insercao no inicio"									<< endl
 				<< " 4. insercao no meio"									<< endl
 				<< " 5. insercao no fim"									<< endl
 				<< " 6. insercao ordenada"									<< endl
 				<< " 7. remocao normal"										<< endl
-				<< " 8. imprimir os elementos"								<< endl
-				<< " 9. busca de um elemento"								<< endl
-				<< " 10. imoressao recursiva"								<< endl
+				<< " 8. imprimir os elementos"									<< endl
+				<< " 9. busca de um elemento"									<< endl
+				<< " 10. imoressao recursiva"									<< endl
 				<< " 11. remocao recursiva"									<< endl
-				<< " 12. checa se duas listas sao iguais"					<< endl
-				<< " 13. checa se duas listas sao iguais recursiva"			<< endl
-				<< " 14. sair" 												<<endl;
+				<< " 12. checa se duas listas sao iguais"							<< endl
+				<< " 13. checa se duas listas sao iguais recursiva"						<< endl
+				<< " 14. sair" 											<<endl;
 		
 		// Faz a leitura da opcao
 		while (op < 1 or op > 12) {
