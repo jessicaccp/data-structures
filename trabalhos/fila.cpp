@@ -3,7 +3,7 @@
 // Curso de Ciencia da Computacao
 // Disciplina de Estruturas de Dados 1 2017.2 - Prof. Bruno Lima
 // Aluna: Jessica Cristina Cacau Patricio (1388627)
-
+//	  Camila Alves Barbosa (1394330)
 // Filas
 // Metodos: criarFila, clear, isEmpty, enfileira, desenfileira, size, print,
 // search, concatenar, intercalar, dividir, ordenar
@@ -81,8 +81,17 @@ class Fila {
 			return true;
 		return false;
 	}
+	// Verifica se a fila esta cheia
+	void isFull() {
+		//Como a fila e dinamica, ela nunca estara cheia.
+		cout << endl << "Fila nao vazia." << endl;
+	}
+	
 	
 	// Insere novo elemento no fim da fila
+	// Faz o novo nodo apontar para o nulo
+	// Se o antigo "fim" da fila for o inicio, faz o inicio apontar para o novo, que sera o novo final.
+	// Se não, o antigo final apontara para o novo, assim, o novo elemento sera o novo final.
 	void enfileira(int info) {
 		Nodo *novo = new Nodo();
 		novo->setInfo(info);
@@ -97,6 +106,10 @@ class Fila {
 	
 	// Remove elemento do inicio da fila e retorna seu valor
 	// Retorna -1 se a fila estiver vazia	
+	// Cria um no auxiliar que guardara o valor do inicio da fila
+	// Se o inicio for o final da lista, a lista ficara vazia.
+	// Se não, o inicio será o proximo elemento da fila. O no auxiliar apontara para ele mesmo e sera removido.
+	// Sera retornado o elemento que foi removido.
 	int desenfileira() {
 		if (inicio != nullptr) {
 			Nodo *aux = inicio;
@@ -113,6 +126,8 @@ class Fila {
 	}
 	
 	// Retorna tamanho da fila
+	// Cria-se uma fila auxiliar para receber os elementos da fila original.
+	// E criado um contador que e incrementado a medida que um novo elemento e inserido na fila auxiliar.
 	int size() {
 		Fila *f = new Fila();
 		f->criarFila();
@@ -132,6 +147,8 @@ class Fila {
 	}
 	
 	// Imprime os valores da fila
+	// E criado uma fila auxiliar que recebe a fila original.
+	// A medida que os elementos sao inseridos na filha auxiliar, eles sao imprimidos na tela.
 	void print() {
 		Fila *f = new Fila();
 		f->criarFila();
@@ -281,22 +298,23 @@ int main () {
 		cout	<< endl
 				<< " 1. clear"			<< endl
 				<< " 2. isEmpty"		<< endl
-				<< " 3. enfileira"		<< endl
-				<< " 4. desenfileira"	<< endl
-				<< " 5. size"			<< endl
-				<< " 6. print"			<< endl
-				<< " 7. search"			<< endl
-				<< " 8. concatenar"		<< endl
-				<< " 9. intercalar"		<< endl
-				<< "10. dividir"		<< endl
-				<< "11. ordenar"		<< endl
-				<< "12. sair"			<< endl;
+				<< " 3. isFull"			<< endl
+				<< " 4. enfileira"		<< endl
+				<< " 5. desenfileira"		<< endl
+				<< " 6. size"			<< endl
+				<< " 7. print"			<< endl
+				<< " 8. search"			<< endl
+				<< " 9. concatenar"		<< endl
+				<< " 10. intercalar"		<< endl
+				<< " 11. dividir"		<< endl
+				<< " 12. ordenar"		<< endl
+				<< " 13. sair"			<< endl;
 		
 		// Faz a leitura da opcao
-		while (op < 1 or op > 12) {
+		while (op < 1 or op > 13) {
 			cout << endl << "Opcao: ";
 			cin >> op;
-			if (op < 1 or op > 12)
+			if (op < 1 or op > 13	)
 				cout << endl << "Opcao invalida." << endl;
 		}
 		
@@ -316,8 +334,13 @@ int main () {
 					cout << endl << "Fila nao vazia." << endl;
 				break;
 			
-			// Insere valor no fim da fila
+			//Verifica se a fila esta cheia
 			case 3:
+				f->isFull();
+				break;
+				
+			// Insere valor no fim da fila
+			case 4:
 				cout << endl << "Insira o valor do elemento a ser adicionado: ";
 				cin >> info;
 				f->enfileira(info);
@@ -325,7 +348,7 @@ int main () {
 				break;
 				
 			// Remove valor do inicio da fila
-			case 4:
+			case 5:
 				if (f->isEmpty())
 					cout << endl << "Fila vazia." << endl;
 				else
@@ -333,12 +356,12 @@ int main () {
 				break;
 				
 			// Verifica tamanho da fila
-			case 5:
+			case 6:
 				cout << endl << "Tamanho da fila: " << f->size() << "." << endl;
 				break;
 			
 			// Exibe todos os elementos da fila, se existirem
-			case 6:
+			case 7:
 				if (f->isEmpty())
 					cout << endl << "Fila vazia." << endl;
 				else {
@@ -348,7 +371,7 @@ int main () {
 				break;
 				
 			// Busca valor informado na fila
-			case 7:
+			case 8:
 				cout << endl << "Insira o valor do elemento a ser procurado: ";
 				cin >> info;
 				if (f->search(info))
@@ -358,21 +381,21 @@ int main () {
 				break;
 			
 			// Concatena duas filas recebidas em uma
-			case 8:
+			case 9:
 				cout << endl << "Menu nao implementado ainda." << endl;
 				break;
 				// concatenar
 				// recebe duas filas e exibe o final
 				
 			// Intercala duas filas recebidas em uma
-			case 9:
+			case 10:
 				cout << endl << "Menu nao implementado ainda." << endl;
 				break;
 				// intercalar
 				// recebe duas filas e exibe a final
 				
 			// Divide a fila em duas que sao passadas por parametro
-			case 10:
+			case 11:
 				if (f->isEmpty())
 					cout << endl << "Fila vazia." << endl;
 				else {
@@ -387,7 +410,7 @@ int main () {
 				break;
 				
 			// Ordena os valores da fila
-			case 11:
+			case 12:
 				if (f->isEmpty())
 					cout << endl << "Fila vazia." << endl;
 				else {
@@ -400,7 +423,7 @@ int main () {
 				break;
 			
 			// Sai do programa
-			case 12:
+			case 13:
 				exit(0);
 				
 			default:
