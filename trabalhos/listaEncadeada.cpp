@@ -79,7 +79,7 @@ class Lista {
 		return false;
 	}
 	
-	// Retorna a quantidade de elementos.
+	// Retorna a quantidade de elementos criando uma lista auxiliar.
 	int getSize() {
 		Nodo *aux = prim;
 		int numeroElementos = 0;
@@ -92,7 +92,7 @@ class Lista {
 		return numeroElementos;
 	}
 	
-	// Insercao no inicio da lista.
+	// Insercao no inicio da lista setando o novo nodo ao primeiro da lista e fazendo o inicio apontar para o novo.
 	void addInicio(int element) {
 		Nodo *novo = new Nodo();
 		novo->setInfo(element);
@@ -102,7 +102,8 @@ class Lista {
 	
 	// Insercao no meio da lista.
 	// Primeiro verifica se a posicao onde o elemento sera adicionado existe.
-	// Se existir, o elemento sera adicionado.
+	// Se existir, o elemento sera adicionado, fazendo o novo nodo apontar para o proximo nodo de onde ele sera inserido
+	// e o antigo nodo daquela posicao apontara para o novo nodo.
 	void addMeio(int element, int pos) {		
 		if (pos > getSize()+1) {
 			cout << "Impossível adicionar na posição " << pos << "." << endl;
@@ -121,7 +122,8 @@ class Lista {
 	}
 	
 	// Insercao no final da lista.
-	// 
+	// Primeiro acha qual o nodo que aponta para o nulo, logo apos faz o novo nodo apontar para o nulo,
+	// e o "ex" ultimo da lista apontara para o novo nodo.
 	void addFim(int element) {
 		Nodo *novo = new Nodo(), *aux = prim;
 		novo->setInfo(element);
@@ -132,8 +134,11 @@ class Lista {
 		
 		aux->setProx(novo);
 	}
-	
-	// Insercao na posicao desejada.
+	// Insercao ordenada na lista.
+	// Cria-se um novo nodo que contem o valor a ser inserido.
+	// Cria-se um nodo auxiliar que aponta para o comeco da lista.
+	// Se o novo nodo for menor que o auxiliar, ele será inserido no começo da lista.
+	// Se não for, sera feito uma busca na lista ate achar o nodo que tem a menor diferenca de valor e o novo sera inserido antes dele.
 	void addOrdenado(int element) {
 		Nodo *novo = new Nodo(), *aux = prim;
 		novo->setInfo(element);
@@ -154,6 +159,8 @@ class Lista {
 	}
 	
 	// Remocao de um elemento da lista.
+	// Primeiro verifica se o elemento existe, ao achar faz o nodo anterior dele apontar para seu sucessor
+	// Logo depois faz com que o nodo que sera eliminado aponte para si mesmo, podendo assim ser excluido.
 	bool remove(int element) {
 		if (search(element) == nullptr)
 			return false;
@@ -170,7 +177,7 @@ class Lista {
 		}
 	}
 	
-	// Imprime todos os elementos da lista enquanto percorre ate o ultimo elemento.
+	// Imprime todos os elementos da lista enquanto percorre ate o ultimo elemento com a ajuda de uma lista auxiliar.
 	void print() {
 		Nodo *aux = prim;
 		while (aux != nullptr) {
@@ -180,7 +187,7 @@ class Lista {
 		cout << endl;
 	}
 	
-	// Busca um elemento percorrendo a lista. 
+	// Busca um elemento percorrendo a lista com uma lista auxiliar.
 	Nodo* search(int element) {
 		Nodo *aux = prim;
 		while (aux != nullptr)
@@ -189,9 +196,10 @@ class Lista {
 		return nullptr;
 	}
 	
-	void sort();
-	
 	/* com recursao */
+	
+	// Imprime os elementos da lista de uma forma recursiva.
+	// Enquanto nao chegar no final da lista, o argumento da funcao sera o proximo nodo.
 	void printRec(Nodo *n) {
 		if (n != nullptr) {
 			cout << n->getInfo() << endl;
@@ -199,6 +207,10 @@ class Lista {
 		}
 	}
 	
+	// Remove um elemento de uma forma recursiva.
+	// Primeiro encontra-se o no que contem o elemento.
+	// Ao encontrar, cria-se um no auxiliar que apontara para o proximo no do elemento que sera removido.
+	// Com isso, o elemento do no auxiliar sera um argumento para a exclusao de outro no.
 	Nodo* removeRec(Nodo *n, int element) {
 		if (n->getInfo() == element) {
 			Nodo *aux = n->getProx();
@@ -209,7 +221,9 @@ class Lista {
 		aux->setProx(removeRec(n->getProx(), element));
 		return n;
 	}
-
+	
+	// Checar se duas listas sao iguais.
+	// Cria-se duas listas auxiliares, se ambas contiverem elementos, sera checado seus valores.
 	bool listasIguais(Nodo *n1, Nodo *n2){
 		Nodo *aux1 = n1;
 		Nodo *aux2 = n2;
@@ -220,6 +234,10 @@ class Lista {
 			return true;
 	}
 	
+	// Checar se duas listas sao iguais de uma forma recursiva.
+	// Se ambas nao contiverem elementos, sao iguais.
+	// Se somente uma for nula, elas nao serao iguais.
+	// Se elas contiverem elementos, sera checado se esses elementos sao iguais e como argumento da funcao sera usado seus proximos nos.
 	bool listasIguaisRec(Nodo *n1, Nodo *n2) {
 		if ( n1 == nullptr && n2 == nullptr ){
 			return true;
@@ -230,9 +248,160 @@ class Lista {
 	}
 };
 
+// Metodos: criarLista, isEmpty, insert(element), insert(pos), insertOrd(element),
+// getSize, search(element), remove(index), print(Node n), eqlist(Node l1, Node l2). 
+	
 	int main() {
 		Lista *lista = new Lista();
 		lista->criarLista();
-
+		int op = 0; 
+		int element =0;
+		int pos = 0;
+		
+		Lista *l1 = new Lista();
+		Lista *l2 = new Lista();
+		l1->criarLista();
+		l2->criarLista();
+		
+		// Menu
+		while (true) {
+		// Opcoes
+		op = 0;
+		cout	<< endl
+				<< " 1. isEmpty"											<< endl
+				<< " 2. getSize"											<< endl
+				<< " 3. insercao no inicio"									<< endl
+				<< " 4. insercao no meio"									<< endl
+				<< " 5. insercao no fim"									<< endl
+				<< " 6. insercao ordenada"									<< endl
+				<< " 7. remocao normal"										<< endl
+				<< " 8. imprimir os elementos"								<< endl
+				<< " 9. busca de um elemento"								<< endl
+				<< " 10. imoressao recursiva"								<< endl
+				<< " 11. remocao recursiva"									<< endl
+				<< " 12. checa se duas listas sao iguais"					<< endl
+				<< " 13. checa se duas listas sao iguais recursiva"			<< endl
+				<< " 14. sair" 												<<endl;
+		
+		// Faz a leitura da opcao
+		while (op < 1 or op > 12) {
+			cout << endl << "Opcao: ";
+			cin >> op;
+			if (op < 1 or op > 12)
+				cout << endl << "Opcao invalida." << endl;
+		}
+		
+		// Realiza o comando de acordo com a opcao.
+		switch(op) {
+			// Verifica se a lista esta vazia.
+			case 1:
+				if(lista->isEmpty())
+					cout << endl << "Lista esta vazia." << endl;
+				else 
+					cout << endl << "Lista nao vazia." << endl;
+				break;
+				
+			// Imprime o tamanho da lista.
+			case 2:
+				cout << endl << "Numero de elementos: " << lista->getSize() << "." << endl;
+				
+			// Insere o valor desejado no inicio da lista.
+			case 3:
+				cout << endl << "Insira o valor a ser inserido: " << endl;
+				cin >> element;
+				lista->addInicio(element);
+				cout << endl << "Valor inserido." << endl;
+				break;
+				
+			// Insere o valor desejado no meio da lista.
+			case 4: 
+				cout << endl << "Insira o valor a ser inserido na lista: " << endl;
+				cin >> element;
+				cout << endl << "Insira a posicao onde voce quer inserir o valor: " << endl;
+				cin >> pos;
+				lista->addMeio(element,pos);
+				cout << endl << "Valor inserido na posicao desejada." << endl;
+				break;
+				
+			// Insere o valor no final da lista
+			case 5:
+				cout << endl << "Insira o valor a ser inserido na lista: " << endl;
+				cin >> element;
+				lista->addFim(element);
+				cout << endl << "Valor inserido no final da lista." << endl;
+				break;
+				
+			// Insere o valor ordenadamente.
+			case 6:
+				cout << endl << "Insira o valor a ser inserido na lista: " << endl;
+				cin >> element;
+				lista->addOrdenado(element);
+				cout << endl << "Valor inserido ordenadamente." << endl;
+				break;
+				
+			// Remove o elemento da lista.
+			case 7:
+				cout << endl << "Insira o valor a ser removido: " << endl;
+				cin >> element;
+				lista->remove(element);
+				cout << endl << "Valor removido." << endl;
+				break;
+				
+			// Imprime os elementos da lista.
+			case 8:
+				cout << endl << "Elementos da fila: ";
+				lista->print();
+				break;
+			
+			// Busca um elemento na lista.
+			case 9:
+				cout << endl << "Insira o valor a ser buscado na lista: " << endl;
+				cin >> element;
+				if (lista->search(element))
+					cout << endl << "Valor contido a lista." << endl;
+				else
+					cout << endl << "Valor nao contido na lista." << endl;
+				break;
+			
+			// Imprime os elementos da lista recursivamente.
+			case 10:
+				cout << endl << "Elementos da fila: ";
+				lista->printRec(lista);
+				break;
+				
+			// Remove um elemento recursivamente.
+			case 11:
+				cout << endl << "Insira o valor a ser removido da lista: " << endl;
+				cin >> element;
+				lista->removeRec(lista, element);
+				cout << endl << "Valor removido da lista.";
+				break;
+				
+			// Verifica se duas listas sao iguais.
+			case 12:
+				if (lista->listasIguais(l1, l2)) 
+					cout << endl << "Listas iguais." << endl;
+				else
+					cout << endl << "Listas nao iguais." << endl;
+				break;
+				
+			// Verifica se duas listas sao iguais recursivamente.
+			case 13: 
+				if (lista->listasIguaisRec(l1, l2))
+					cout << endl << "Listas iguais." << endl;
+				else
+					cout << endl << "Listas nao iguais." << endl;
+				break;
+			
+			// Sair do programa.
+			case 14:
+				exit(0);
+			
+			default:
+				cout << endl << "Opcao invalida." << endl;
+				break;
+		}
+		
 		return 0;
 	}
+}
