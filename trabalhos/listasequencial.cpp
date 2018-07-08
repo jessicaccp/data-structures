@@ -173,10 +173,10 @@ int main () {
 				<< " 9. sair"							<< endl;
 		
 		// Faz a leitura da opcao
-		while (op < 1 or op > 7) {
+		while (op < 1 or op > 9) {
 			cout << endl << "Opcao: ";
 			cin >> op;
-			if (op < 1 or op > 7)
+			if (op < 1 or op > 9)
 				cout << endl << "Opcao invalida." << endl;
 		}
 		
