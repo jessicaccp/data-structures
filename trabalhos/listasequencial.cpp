@@ -155,7 +155,12 @@ class Lista {
 // Metodos: criarFila, isEmpty, getSize, insert(info), insert(element, pos), insertOrd(element), remove(index), print.
 int main () {
 	Lista *l = new Lista();
-	l->criarLista();
+	l->criarLista(50);
+	int op = 0;
+	int info = 0;
+	int pos = 0;
+	int element = 0;
+	int index = 0;
 	
 	// Menu
 	while (true) {
@@ -165,11 +170,11 @@ int main () {
 				<< " 1. isEmpty"						<< endl
 				<< " 2. isFull"							<< endl
 				<< " 3. getSize"						<< endl
-				<< " 4. insercao no final"				<< endl
-				<< " 5. insercao com detalhamentos"		<< endl
-				<< " 6. insercao ordenada"				<< endl
-				<< " 7. remocao de um elemento"			<< endl
-				<< " 8. imprimir todos os elementos"	<< endl
+				<< " 4. insercao no final"					<< endl
+				<< " 5. insercao com detalhamentos"				<< endl
+				<< " 6. insercao ordenada"					<< endl
+				<< " 7. remocao de um elemento"					<< endl
+				<< " 8. imprimir todos os elementos"				<< endl
 				<< " 9. sair"							<< endl;
 		
 		// Faz a leitura da opcao
@@ -204,7 +209,7 @@ int main () {
 			
 			// Insere o valor no final da lista
 			case 4:
-				ccout << endl << "Insira o valor do elemento a ser adicionado na lista: ";
+				cout << endl << "Insira o valor do elemento a ser adicionado na lista: ";
 				cin >> info;
 				l->insert(info);
 				cout << info << "Elemento adicionado na lista." << endl;
@@ -231,7 +236,7 @@ int main () {
 			// Remove o elemento desejado da lista.
 			case 7:
 				cout << endl << "Insira a posicao que voce quer remover: ";
-				cin << index;
+				cin >> index;
 				l->remove(index);
 				cout << "Elemento removido." << endl;
 				break;
