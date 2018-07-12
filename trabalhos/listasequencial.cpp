@@ -1,18 +1,13 @@
 // Universidade Estadual do Ceara
 // Centro de Ciencias e Tecnologia
 // Curso de Ciencia da Computacao
-// Disciplina de Estruturas de Dados 1 2017.2 - Prof. Bruno Lima
+// Disciplina de Estrutura de Dados 1 2017.2 - Prof. Bruno Lima
 // Aluna: Jessica Cristina Cacau Patricio (1388627)
 //		  Camila Alves Barbosa (1394330)
-// Listas sequenciais
-// Metodos: criarLista, isEmpty, isFull, getSize, insert (fim), insert (pos), insert(ord), remove(index), print.
 
-/*
-public void insert(int element, int pos) - insere um novo elemento em uma determinada posição passada por parâmetro
-public void insertOrd(int element) - insere um novo elemento de forma ordenada, ou seja, ao inserir um novo elemento a lista deve continuar ordenada em ordem crescente
-public bool remove(int index) - remove o elemento da posição index, caso exista na lista.
-public void print() - imprime todos os elementos da lista 
-*/
+// Lista sequencial
+// Metodos: criarLista, isEmpty, isFull, getSize, insert (fim), insert (pos),
+// insert(ord), remove, print.
 
 #include<iostream>
 using namespace std;
@@ -40,7 +35,7 @@ class Lista {
 	}
 	
 	// Aloca espaco na memoria do tamanho desejado, atribui ao ponteiro lista
-	// e seta todos os valores como -1, que seria o equivalente a nulo
+	// e seta todos os valores como -1, que seria o equivalente a nulo.
 	void criarLista(int tamanho) {
 		setLista(new int[tamanho]);
 		setTamanho(tamanho);
@@ -76,7 +71,7 @@ class Lista {
 	// Insere elemento no final da lista
 	// Se lista nao estiver cheia, adiciona elemento no final. Se estiver, aloca
 	// novo espaco, transfere todos os elementos, deleta lista anterior, altera
-	// ponteiro da lista e adiciona elemento no final da nova lista
+	// ponteiro da lista e adiciona elemento no final da nova lista.
 	void insert(int info) {
 		if (not isFull())
 			lista[getSize()] = info;
@@ -94,9 +89,10 @@ class Lista {
 	}
 	
 	// Insere elemento na posicao desejada
-	// Checa se o lugar onde o usuario que inserir e valido, se não for entra no primeiro if.
-	// Se for valido e se a lista nao estiver cheia, entra no primeiro else if.
-	// Se ela estiver cheia, 
+	// Checa se o lugar onde o usuario que inserir e valido. Se nao for, entra
+	// no primeiro if. Se for valido e se a lista nao estiver cheia, entra no
+	// primeiro else if. Se ela estiver cheia, aumenta o tamanho do vetor e
+	// insere o elemento.
 	void insert(int element, int pos) {
 		if (pos>tamanho or pos>getSize()) 
 			cout << "Impossível inserir nessa posição." << endl;
@@ -111,7 +107,7 @@ class Lista {
 		}
 	}
 	
-	// Funcao de ordenacao para ordenar o vetor.
+	// Ordena o vetor.
 	 void ordenar() {
 	 	for (int i=0; i<getSize()-1; i++)
 	 		for (int j=i; j<getSize(); j++)
@@ -129,8 +125,9 @@ class Lista {
 	}
 	
 	// Remove um elemento da posicao index da lista
-	// Primeiro checa-se se na posicao existe um elemento ou se a posicao que sera eliminada existe.
-	// Se ele existir, o elemento sera removido e o tamanho da lista diminuira.
+	// Primeiro checa se na posicao existe um elemento ou se a posicao que
+	// sera eliminada existe. Se ele existir, o elemento sera removido e o
+	// tamanho da lista diminuira.
 	bool remove(int index) {
 		if (index >= tamanho or lista[index] == -1)
 			return false;
@@ -152,7 +149,7 @@ class Lista {
 	}
 	
 };
-// Metodos: criarFila, isEmpty, getSize, insert(info), insert(element, pos), insertOrd(element), remove(index), print.
+
 int main () {
 	Lista *l = new Lista();
 	l->criarLista(50);
@@ -171,7 +168,7 @@ int main () {
 				<< " 2. isFull"							<< endl
 				<< " 3. getSize"						<< endl
 				<< " 4. insercao no final"				<< endl
-				<< " 5. insercao com detalhamentos"		<< endl
+				<< " 5. insercao em posicao especifica"	<< endl
 				<< " 6. insercao ordenada"				<< endl
 				<< " 7. remocao de um elemento"			<< endl
 				<< " 8. imprimir todos os elementos"	<< endl
@@ -207,6 +204,7 @@ int main () {
 			// Imprime o tamanho da lista.
 			case 3:
 				cout << endl << "Numero de elementos: " << l->getSize() << "." << endl;
+				break;
 			
 			// Insere o valor no final da lista
 			case 4:
