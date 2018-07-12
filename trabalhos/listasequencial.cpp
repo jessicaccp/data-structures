@@ -137,7 +137,7 @@ class Lista {
 		for (int i=index; i<getSize()-1; i++)
 			lista[i] = lista[i+1];
 		lista[getSize()-1] = -1;
-		tamanho--;
+		return true;
 	}
 	
 	// Imprime todos os elementos da lista
@@ -170,12 +170,13 @@ int main () {
 				<< " 1. isEmpty"						<< endl
 				<< " 2. isFull"							<< endl
 				<< " 3. getSize"						<< endl
-				<< " 4. insercao no final"					<< endl
-				<< " 5. insercao com detalhamentos"				<< endl
-				<< " 6. insercao ordenada"					<< endl
-				<< " 7. remocao de um elemento"					<< endl
-				<< " 8. imprimir todos os elementos"				<< endl
-				<< " 9. sair"							<< endl;
+				<< " 4. insercao no final"				<< endl
+				<< " 5. insercao com detalhamentos"		<< endl
+				<< " 6. insercao ordenada"				<< endl
+				<< " 7. remocao de um elemento"			<< endl
+				<< " 8. imprimir todos os elementos"	<< endl
+				<< " 9. sair"							<< endl
+				<< "Observacao: Para utilizar o caso 6, a lista deve estar ordenada." << endl;
 		
 		// Faz a leitura da opcao
 		while (op < 1 or op > 9) {
