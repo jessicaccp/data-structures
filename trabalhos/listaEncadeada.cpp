@@ -1,21 +1,13 @@
 // Universidade Estadual do Ceará
 // Centro de Ciências e Tecnologia
 // Curso de Ciência da Computação
-// Disciplina de Estruturas de Dados 1 2017.2 - Prof. Bruno Lima
+// Disciplina de Estrutura de Dados 1 2017.2 - Prof. Bruno Lima
 // Alunas:	Jessica Cristina Cacau Patrício - 1388627
 //			Camila Alves Barbosa - 1394330 
 
-/*
-public bool isEmpty() - retorna se a lista está vazia ou não.
-public void insert(int element) - insere um novo elemento no final da lista.
-public void insert(int element, int pos) - insere um novo elemento em uma determinada posição passada por parâmetro (3 casos).
-public void insertOrd(int element) - insere um novo elemento de forma ordenada, ou seja, ao inserir um novo elemento a lista deve continuar ordenada em ordem crescente.
-public int getSize() - retorna o número de elementos da lista
-public int search(int element) - Busca um elemento na lista, caso exista retorna a posição, caso contrário retorna NULL.
-public bool remove(int index) - remove o elemento da posição index, caso exista na lista.
-public void print(Node n) - imprime a lista de forma recursiva.
-public bool eqlist(Node l1, Node l2) - verifica se duas listas são iguais.
-*/
+// Lista encadeada
+// Metodos: isEmpty, getSize, addInicio, addMeio, addFim, addOrdenado, remove,
+// print, search, printRec, removeRec, listasIguais, listasIguaisRec
 
 #include<iostream>
 using namespace std;
@@ -64,8 +56,6 @@ class Lista {
 		}
 	}
 	
-	/* sem recursao */
-	
 	// Verifica se a lista esta vazia.
 	bool isEmpty() {
 		if (prim == nullptr)
@@ -86,7 +76,8 @@ class Lista {
 		return numeroElementos;
 	}
 	
-	// Insercao no inicio da lista setando o novo nodo ao primeiro da lista e fazendo o inicio apontar para o novo.
+	// Insercao no inicio da lista setando o novo nodo ao primeiro da lista e
+	// fazendo o inicio apontar para o novo.
 	void addInicio(int element) {
 		Lista *novo = new Lista();
 		novo->setInfo(element);
@@ -96,8 +87,9 @@ class Lista {
 	
 	// Insercao no meio da lista.
 	// Primeiro verifica se a posicao onde o elemento sera adicionado existe.
-	// Se existir, o elemento sera adicionado, fazendo o novo nodo apontar para o proximo nodo de onde ele sera inserido
-	// e o antigo nodo daquela posicao apontara para o novo nodo.
+	// Se existir, o elemento sera adicionado, fazendo o novo nodo apontar para
+	// o proximo nodo de onde ele sera inserido e o antigo nodo daquela posicao
+	// apontara para o novo nodo.
 	void addMeio(int element, int pos) {		
 		if (pos > getSize()+1) {
 			cout << "Impossível adicionar na posição " << pos << "." << endl;
@@ -116,8 +108,9 @@ class Lista {
 	}
 	
 	// Insercao no final da lista.
-	// Primeiro acha qual o nodo que aponta para o nulo, logo apos faz o novo nodo apontar para o nulo,
-	// e o "ex" ultimo da lista apontara para o novo nodo.
+	// Primeiro acha qual o nodo que aponta para o nulo, logo apos faz o novo
+	// nodo apontar para o nulo, e o "ex" ultimo da lista apontara para o novo
+	// nodo.
 	void addFim(int element) {
 		Lista *novo = new Lista(), *aux = prim;
 		novo->setInfo(element);
@@ -128,11 +121,13 @@ class Lista {
 		
 		aux->setProx(novo);
 	}
+	
 	// Insercao ordenada na lista.
-	// Cria-se um novo nodo que contem o valor a ser inserido.
-	// Cria-se um nodo auxiliar que aponta para o comeco da lista.
-	// Se o novo nodo for menor que o auxiliar, ele será inserido no começo da lista.
-	// Se não for, sera feito uma busca na lista ate achar o nodo que tem a menor diferenca de valor e o novo sera inserido antes dele.
+	// Cria-se um novo nodo que contem o valor a ser inserido. Cria-se um nodo
+	// auxiliar que aponta para o comeco da lista. Se o novo nodo for menor que
+	// o auxiliar, ele será inserido no começo da lista. Se não for, sera feito
+	// uma busca na lista ate achar o nodo que tem a menor diferenca de valor e
+	// o novo sera inserido antes dele.
 	void addOrdenado(int element) {
 		Lista *novo = new Lista(), *aux = prim;
 		novo->setInfo(element);
@@ -153,8 +148,9 @@ class Lista {
 	}
 	
 	// Remocao de um elemento da lista.
-	// Primeiro verifica se o elemento existe, ao achar faz o nodo anterior dele apontar para seu sucessor
-	// Logo depois faz com que o nodo que sera eliminado aponte para si mesmo, podendo assim ser excluido.
+	// Primeiro verifica se o elemento existe, ao achar faz o nodo anterior dele
+	// apontar para seu sucessor. Logo depois faz com que o nodo que sera
+	// eliminado aponte para si mesmo, podendo assim ser excluido.
 	bool remove(int element) {
 		if (search(element) == false)
 			return false;
@@ -171,7 +167,8 @@ class Lista {
 		}
 	}
 	
-	// Imprime todos os elementos da lista enquanto percorre ate o ultimo elemento com a ajuda de uma lista auxiliar.
+	// Imprime todos os elementos da lista enquanto percorre ate o ultimo
+	// elemento com a ajuda de uma lista auxiliar.
 	void print() {
 		Lista *aux = prim;
 		while (aux != nullptr) {
@@ -191,10 +188,9 @@ class Lista {
                 return false;
     }
 	
-	/* com recursao */
-	
 	// Imprime os elementos da lista de uma forma recursiva.
-	// Enquanto nao chegar no final da lista, o argumento da funcao sera o proximo nodo.
+	// Enquanto nao chegar no final da lista, o argumento da funcao sera o
+	// proximo nodo.
 	void printRec(Lista *n) {
 		if (n != nullptr) {
 			cout << n->getInfo() << endl;
@@ -203,9 +199,10 @@ class Lista {
 	}
 	
 	// Remove um elemento de uma forma recursiva.
-	// Primeiro encontra-se o no que contem o elemento.
-	// Ao encontrar, cria-se um no auxiliar que apontara para o proximo no do elemento que sera removido.
-	// Com isso, o elemento do no auxiliar sera um argumento para a exclusao de outro no.
+	// Primeiro encontra-se o no que contem o elemento. Ao encontrar, cria-se um
+	// no auxiliar que apontara para o proximo no do elemento que sera removido.
+	// Com isso, o elemento do no auxiliar sera um argumento para a exclusao de
+	// outro no.
 	Lista* removeRec(Lista *n, int element) {
 		if (n->getInfo() == element) {
 			Lista *aux = n->getProx();
@@ -218,7 +215,8 @@ class Lista {
 	}
 	
 	// Checar se duas listas sao iguais.
-	// Cria-se duas listas auxiliares, se ambas contiverem elementos, sera checado seus valores.
+	// Cria-se duas listas auxiliares, se ambas contiverem elementos, sera
+	// checado seus valores.
 	bool listasIguais(Lista *n1, Lista *n2){
 		Lista *aux1 = n1;
 		Lista *aux2 = n2;
@@ -230,9 +228,10 @@ class Lista {
 	}
 	
 	// Checar se duas listas sao iguais de uma forma recursiva.
-	// Se ambas nao contiverem elementos, sao iguais.
-	// Se somente uma for nula, elas nao serao iguais.
-	// Se elas contiverem elementos, sera checado se esses elementos sao iguais e como argumento da funcao sera usado seus proximos nos.
+	// Se ambas nao contiverem elementos, sao iguais. Se somente uma for nula,
+	// elas nao serao iguais. Se elas contiverem elementos, sera checado se
+	// esses elementos sao iguais e como argumento da funcao sera usado seus
+	// proximos nos.
 	bool listasIguaisRec(Lista *n1, Lista *n2) {
 		if ( n1 == nullptr && n2 == nullptr ){
 			return true;
@@ -242,9 +241,6 @@ class Lista {
 			return (( n1->getInfo() == n2->getInfo() && listasIguaisRec(n1->getProx(), n2->getProx())));
 	}
 };
-
-// Metodos: criarLista, isEmpty, insert(element), insert(pos), insertOrd(element),
-// getSize, search(element), remove(index), print(Node n), eqlist(Node l1, Node l2). 
 	
 	int main() {
 		Lista *lista = new Lista();
@@ -299,6 +295,7 @@ class Lista {
 			// Imprime o tamanho da lista.
 			case 2:
 				cout << endl << "Numero de elementos: " << lista->getSize() << "." << endl;
+				break;
 				
 			// Insere o valor desejado no inicio da lista.
 			case 3:
