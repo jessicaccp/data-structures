@@ -6,7 +6,7 @@
 //	  	  Camila Alves Barbosa (1394330)
 // Filas
 // Metodos: criarFila, clear, isEmpty, enfileira, desenfileira, size, print,
-// search, concatenar, intercalar, dividir, ordenar
+// search.
 
 #include<iostream>
 using namespace std;
