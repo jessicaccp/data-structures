@@ -3,8 +3,7 @@
 // Curso de Ciência da Computação
 // Disciplina de Estruturas de Dados 1 2017.2 - Prof. Bruno Lima
 // Alunas:	Jessica Cristina Cacau Patrício - 1388627
-//			Camila Alves Barbosa - 1394330 
-//*Metodos: criarLista, isEmpty, insert(element), insert(pos), insertOrd(element), getSize, search(element), remove(index), print(Node n), eqlist(Node l1, Node l2). 
+//		Camila Alves Barbosa - 1394330 
 
 /*
 public bool isEmpty() - retorna se a lista está vazia ou não.
@@ -21,39 +20,34 @@ public bool eqlist(Node l1, Node l2) - verifica se duas listas são iguais.
 #include<iostream>
 using namespace std;
 
-class Nodo {
-	private:
-	int info;
-	Nodo *prox;
-	
-	public:
-	int getInfo() {
-		return info;
-	}
-	
-	void setInfo(int info) {
-		this->info = info;
-	}
-	
-	Nodo* getProx() {
-		return prox;
-	}
-	
-	void setProx(Nodo *prox) {
-		this->prox = prox;
-	}
-};
-
 class Lista {
+        int info;
 		private:
-		Nodo *prim= prim;
+		Lista *prim= prim;
 		
 		public:
-		Nodo* getPrim() {
+		Lista* getPrim() {
 			return prim;
 		}
 		
-		void setPrim(Nodo *prim) {
+		public:
+    	int getInfo() {
+    		return info;
+    	}
+    	
+    	void setInfo(int info) {
+    		this->info = info;
+    	}
+    	
+    	Lista* getProx() {
+    		return prim;
+    	}
+    	
+    	void setProx(Lista *prim) {
+    		this->prim = prim;
+    	}
+		
+		void setPrim(Lista *prim) {
 			this->prim = prim;
 		}
 		
@@ -64,7 +58,7 @@ class Lista {
 		// Remove todos os elementos da lista.
 		void liberarLista() {
 		while (prim != nullptr) {
-			Nodo *aux = prim->getProx();
+			Lista *aux = prim->getProx();
 			delete prim;
 			prim = aux;
 		}
@@ -81,7 +75,7 @@ class Lista {
 	
 	// Retorna a quantidade de elementos criando uma lista auxiliar.
 	int getSize() {
-		Nodo *aux = prim;
+		Lista *aux = prim;
 		int numeroElementos = 0;
 		
 		while (aux != nullptr) {
@@ -94,7 +88,7 @@ class Lista {
 	
 	// Insercao no inicio da lista setando o novo nodo ao primeiro da lista e fazendo o inicio apontar para o novo.
 	void addInicio(int element) {
-		Nodo *novo = new Nodo();
+		Lista *novo = new Lista();
 		novo->setInfo(element);
 		novo->setProx(prim);
 		prim = novo;
@@ -110,8 +104,8 @@ class Lista {
 			return;
 		}
 		int cont = 0;
-		Nodo *aux = prim;
-		Nodo *novo = new Nodo();
+		Lista *aux = prim;
+		Lista *novo = new Lista();
 		novo->setInfo(element);
 		while (pos--){
 			aux = aux->getProx();
@@ -125,7 +119,7 @@ class Lista {
 	// Primeiro acha qual o nodo que aponta para o nulo, logo apos faz o novo nodo apontar para o nulo,
 	// e o "ex" ultimo da lista apontara para o novo nodo.
 	void addFim(int element) {
-		Nodo *novo = new Nodo(), *aux = prim;
+		Lista *novo = new Lista(), *aux = prim;
 		novo->setInfo(element);
 		novo->setProx(nullptr);
 		
@@ -140,7 +134,7 @@ class Lista {
 	// Se o novo nodo for menor que o auxiliar, ele será inserido no começo da lista.
 	// Se não for, sera feito uma busca na lista ate achar o nodo que tem a menor diferenca de valor e o novo sera inserido antes dele.
 	void addOrdenado(int element) {
-		Nodo *novo = new Nodo(), *aux = prim;
+		Lista *novo = new Lista(), *aux = prim;
 		novo->setInfo(element);
 		
 		if (aux->getInfo() > element) {
@@ -164,10 +158,10 @@ class Lista {
 	bool remove(int element) {
 		if (search(element) == nullptr)
 			return false;
-		Nodo *aux = prim;
+		Lista *aux = prim;
 		while (aux->getProx() != nullptr) {
 			if ((aux->getProx())->getInfo() == element) {
-				Nodo *rm = aux->getProx();
+				Lista *rm = aux->getProx();
 				aux->setProx(rm->getProx());
 				rm->setProx(rm);
 				delete rm;
@@ -179,7 +173,7 @@ class Lista {
 	
 	// Imprime todos os elementos da lista enquanto percorre ate o ultimo elemento com a ajuda de uma lista auxiliar.
 	void print() {
-		Nodo *aux = prim;
+		Lista *aux = prim;
 		while (aux != nullptr) {
 			cout << aux->getInfo() << " ";
 			aux = aux->getProx();
@@ -188,8 +182,8 @@ class Lista {
 	}
 	
 	// Busca um elemento percorrendo a lista com uma lista auxiliar.
-	Nodo* search(int element) {
-		Nodo *aux = prim;
+	Lista* search(int element) {
+		Lista *aux = prim;
 		while (aux != nullptr)
 			if (aux->getInfo() == element)
 				return aux;
@@ -200,7 +194,7 @@ class Lista {
 	
 	// Imprime os elementos da lista de uma forma recursiva.
 	// Enquanto nao chegar no final da lista, o argumento da funcao sera o proximo nodo.
-	void printRec(Nodo *n) {
+	void printRec(Lista *n) {
 		if (n != nullptr) {
 			cout << n->getInfo() << endl;
 			printRec(n->getProx());
@@ -211,22 +205,22 @@ class Lista {
 	// Primeiro encontra-se o no que contem o elemento.
 	// Ao encontrar, cria-se um no auxiliar que apontara para o proximo no do elemento que sera removido.
 	// Com isso, o elemento do no auxiliar sera um argumento para a exclusao de outro no.
-	Nodo* removeRec(Nodo *n, int element) {
+	Lista* removeRec(Lista *n, int element) {
 		if (n->getInfo() == element) {
-			Nodo *aux = n->getProx();
+			Lista *aux = n->getProx();
 			delete n;
 			return aux;
 		}
-		Nodo *aux = prim;
+		Lista *aux = prim;
 		aux->setProx(removeRec(n->getProx(), element));
 		return n;
 	}
 	
 	// Checar se duas listas sao iguais.
 	// Cria-se duas listas auxiliares, se ambas contiverem elementos, sera checado seus valores.
-	bool listasIguais(Nodo *n1, Nodo *n2){
-		Nodo *aux1 = n1;
-		Nodo *aux2 = n2;
+	bool listasIguais(Lista *n1, Lista *n2){
+		Lista *aux1 = n1;
+		Lista *aux2 = n2;
 		for (aux1 != nullptr && aux2 != nullptr; aux1 = aux1->getProx(); aux2 = aux2->getProx()){
 			if (aux1->getInfo() != aux2->getInfo())
 				return false;
@@ -238,7 +232,7 @@ class Lista {
 	// Se ambas nao contiverem elementos, sao iguais.
 	// Se somente uma for nula, elas nao serao iguais.
 	// Se elas contiverem elementos, sera checado se esses elementos sao iguais e como argumento da funcao sera usado seus proximos nos.
-	bool listasIguaisRec(Nodo *n1, Nodo *n2) {
+	bool listasIguaisRec(Lista *n1, Lista *n2) {
 		if ( n1 == nullptr && n2 == nullptr ){
 			return true;
 		}else if ( n1 == nullptr || n2 == nullptr){
@@ -268,26 +262,26 @@ class Lista {
 		// Opcoes
 		op = 0;
 		cout	<< endl
-				<< " 1. isEmpty"										<< endl
-				<< " 2. getSize"										<< endl
+				<< " 1. isEmpty"											<< endl
+				<< " 2. getSize"											<< endl
 				<< " 3. insercao no inicio"									<< endl
 				<< " 4. insercao no meio"									<< endl
 				<< " 5. insercao no fim"									<< endl
 				<< " 6. insercao ordenada"									<< endl
 				<< " 7. remocao normal"										<< endl
-				<< " 8. imprimir os elementos"									<< endl
-				<< " 9. busca de um elemento"									<< endl
-				<< " 10. imoressao recursiva"									<< endl
+				<< " 8. imprimir os elementos"								<< endl
+				<< " 9. busca de um elemento"								<< endl
+				<< " 10. impressao recursiva"								<< endl
 				<< " 11. remocao recursiva"									<< endl
-				<< " 12. checa se duas listas sao iguais"							<< endl
-				<< " 13. checa se duas listas sao iguais recursiva"						<< endl
-				<< " 14. sair" 											<<endl;
+				<< " 12. checa se duas listas sao iguais"					<< endl
+				<< " 13. checa se duas listas sao iguais recursiva"			<< endl
+				<< " 14. sair" 												<<endl;
 		
 		// Faz a leitura da opcao
-		while (op < 1 or op > 12) {
+		while (op < 1 or op > 14) {
 			cout << endl << "Opcao: ";
 			cin >> op;
-			if (op < 1 or op > 12)
+			if (op < 1 or op > 14)
 				cout << endl << "Opcao invalida." << endl;
 		}
 		
@@ -402,6 +396,7 @@ class Lista {
 				break;
 		}
 		
-		return 0;
+		
 	}
+	return 0;
 }
