@@ -3,7 +3,7 @@
 // Curso de Ciência da Computação
 // Disciplina de Estruturas de Dados 1 2017.2 - Prof. Bruno Lima
 // Alunas:	Jessica Cristina Cacau Patrício - 1388627
-//		Camila Alves Barbosa - 1394330 
+//			Camila Alves Barbosa - 1394330 
 
 /*
 public bool isEmpty() - retorna se a lista está vazia ou não.
@@ -156,7 +156,7 @@ class Lista {
 	// Primeiro verifica se o elemento existe, ao achar faz o nodo anterior dele apontar para seu sucessor
 	// Logo depois faz com que o nodo que sera eliminado aponte para si mesmo, podendo assim ser excluido.
 	bool remove(int element) {
-		if (search(element) == nullptr)
+		if (search(element) == false)
 			return false;
 		Lista *aux = prim;
 		while (aux->getProx() != nullptr) {
@@ -182,13 +182,14 @@ class Lista {
 	}
 	
 	// Busca um elemento percorrendo a lista com uma lista auxiliar.
-	Lista* search(int element) {
-		Lista *aux = prim;
-		while (aux != nullptr)
-			if (aux->getInfo() == element)
-				return aux;
-		return nullptr;
-	}
+	bool search(int element) {
+        Lista *aux = prim;
+        while (aux != nullptr)
+            if (aux->getInfo() == element)
+                return true;
+            else    
+                return false;
+    }
 	
 	/* com recursao */
 	
@@ -275,7 +276,7 @@ class Lista {
 				<< " 11. remocao recursiva"									<< endl
 				<< " 12. checa se duas listas sao iguais"					<< endl
 				<< " 13. checa se duas listas sao iguais recursiva"			<< endl
-				<< " 14. sair" 												<<endl;
+				<< " 14. sair" 												<< endl;
 		
 		// Faz a leitura da opcao
 		while (op < 1 or op > 14) {
@@ -337,8 +338,10 @@ class Lista {
 			case 7:
 				cout << endl << "Insira o valor a ser removido: " << endl;
 				cin >> element;
-				lista->remove(element);
-				cout << endl << "Valor removido." << endl;
+				if(lista->remove(element))
+					cout << endl << "Valor removido." << endl;
+				else 
+					cout << endl << "Valor nao contido na lista para executar a remocao." << endl;
 				break;
 				
 			// Imprime os elementos da lista.
@@ -351,10 +354,12 @@ class Lista {
 			case 9:
 				cout << endl << "Insira o valor a ser buscado na lista: " << endl;
 				cin >> element;
-				if (lista->search(element))
+				if (lista->search(element)) {
 					cout << endl << "Valor contido a lista." << endl;
-				else
+				}
+				else {
 					cout << endl << "Valor nao contido na lista." << endl;
+				}
 				break;
 			
 			// Imprime os elementos da lista recursivamente.
