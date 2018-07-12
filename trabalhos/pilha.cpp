@@ -2,19 +2,12 @@
 // Centro de Ciencias e Tecnologia
 // Curso de Ciencia da Computacao
 // Disciplina de Estruturas de Dados 1 2017.2 - Prof. Bruno Lima
-// Aluna: Jessica Cristina Cacau Patricio (1388627)
-//	  Camila Alves Barbosa (1394330)
-// Pilhas
-// Metodos: criarPilha, clear, isEmpty, isFull, push, pop, top, size, print, search
+// Alunas:	Jessica Cristina Cacau Patricio (1388627)
+//			Camila Alves Barbosa (1394330)
 
-// isEmpty() - retorna se a pilha esta vazia ou nao.
-// isFull() - retorna se a pilha esta cheia ou nao.
-// push(int element) - adiciona o elemento do topo da pilha.
-// pop() - remove o elemento do topo da pilha.
-// top() - imprime o valor do topo da pilha.
-// size() - retorna o tamanho da pilha.
-// print() - imprime os valores da pilha.
-// search() - busca um elemento na pilha.
+// Pilha
+// Metodos: criarPilha, clear, isEmpty, isFull, push, pop, top, size, print,
+// search
 
 #include<iostream>
 using namespace std;
@@ -95,10 +88,12 @@ class Pilha {
 	}
 	
 	// Remove elemento do topo e retorna seu valor
-	// Primeiro checa se existe elementos na pilha, e cria uma pilha auxiliar se existir.
 	// Retorna -1 se pilha esta vazia.
-	// Se a pilha conter elementos, a pilha auxiliar ira armazenar o topo, o topo sera atualizado com o proximo elemento da pilha
-	// Assim faremos o auxiliar apontar para si mesmo, eliminando o valor da pilha, e retornara o elemento que foi eliminado.
+	// Primeiro checa se existe elementos na pilha, e cria uma pilha auxiliar
+	// se existir. Se a pilha conter elementos, a pilha auxiliar ira armazenar o
+	// topo, o topo sera atualizado com o proximo elemento da pilha. Assim
+	// faremos o auxiliar apontar para si mesmo, eliminando o valor da pilha, e
+	// retornara o elemento que foi eliminado.
 	int pop() {
 		if (topo != nullptr) {
 			Nodo *aux = topo;
@@ -120,9 +115,10 @@ class Pilha {
 	}
 	
 	// Retorna tamanho da pilha
-	// Cria uma pilha auxiliar que armazenara os elementos da pilha original.
-	// E criado um contador que sera incrementado sempre um novo elemento for inserido na pilha auxiliar.
-	// Sera retornado o valor do contador, mostrando a quantidade de elementos existentes na pilha.
+	// Cria uma pilha auxiliar que armazenara os elementos da pilha original. E
+	// criado um contador que sera incrementado sempre um novo elemento for
+	// inserido na pilha auxiliar. Sera retornado o valor do contador, mostrando
+	// a quantidade de elementos existentes na pilha.
 	int size() {
 		Pilha *p = new Pilha();
 		p->criarPilha();
@@ -142,7 +138,8 @@ class Pilha {
 	}
 	
 	// Imprime os valores da pilha
-	// Cria-se uma pilha auxiliar que armazenara os valores da pilha original e imprimira seus valores a medida do processo. 
+	// Cria-se uma pilha auxiliar que armazenara os valores da pilha original e
+	// imprimira seus valores a medida do processo. 
 	void print() {
 		Pilha *p = new Pilha();
 		p->criarPilha();
@@ -160,8 +157,9 @@ class Pilha {
 	}
 	
 	// Verifica se o valor desejado existe na pilha
-	// Cria uma pilha auxiliar que armazenara os valores ate encontrar o valor desejado.
-	// E setado uma flag para indicar se o elemento existe ou nao, se o valor for achado, a flag sera acionada e retornara true.
+	// Cria uma pilha auxiliar que armazenara os valores ate encontrar o valor
+	// desejado. E setado uma flag para indicar se o elemento existe ou nao, se
+	// o valor for achado, a flag sera acionada e retornara true.
 	bool search(int info) {
 		Pilha *p = new Pilha();
 		p->criarPilha();
@@ -184,8 +182,6 @@ class Pilha {
 	}
 };
 
-// Metodos: criarPilha, clear, isEmpty, isFull, push, pop, top, size, print, search
-
 int main () {
 	Pilha *p = new Pilha();
 	p->criarPilha();
@@ -200,8 +196,8 @@ int main () {
 				<< "2. isEmpty"	<< endl
 				<< "3. isFull"  << endl
 				<< "4. push"	<< endl
-				<< "5. pop"	<< endl
-				<< "6. top"	<< endl
+				<< "5. pop"		<< endl
+				<< "6. top"		<< endl
 				<< "7. size"	<< endl
 				<< "8. print"	<< endl
 				<< "9. search"	<< endl
